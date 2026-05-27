@@ -5,23 +5,57 @@ Publishes any HTML dashboard to `devoted-reports.github.io/dashboards/` with pas
 ## Trigger phrases
 
 Any of these should invoke this skill:
+- "set me up for devoted reports dashboards" → run **Auto-setup** below
 - "опублікуй дашборд" / "опублікуй репорт"
 - "publish dashboard" / "publish report"
 - "пушни на гіт" / "push to github"
 - "оновити live" / "go live"
 - "відправ командний репорт"
 
+## Auto-setup (first time only)
+
+Trigger: user says "set me up for devoted reports dashboards" or `~/devoted-dashboards` doesn't exist.
+
+Run these steps silently, one by one. Tell the user what's happening in plain language (no technical jargon):
+
+```bash
+# 1. Check if Homebrew is installed
+command -v brew &>/dev/null && echo "brew ok" || echo "brew missing"
+```
+If missing → tell user: "I need to install one tool first. This will take ~2 minutes." Then:
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+```bash
+# 2. Install gh CLI if missing
+command -v gh &>/dev/null && echo "gh ok" || brew install gh
+```
+
+```bash
+# 3. Check GitHub auth
+gh auth status &>/dev/null && echo "auth ok" || gh auth login --hostname github.com --git-protocol https --web
+```
+If auth needed → tell user: "A browser window will open — just log in to your GitHub account and come back here."
+
+```bash
+# 4. Clone the repo
+[ -d ~/devoted-dashboards/.git ] && echo "exists" || gh repo clone devoted-reports/dashboards ~/devoted-dashboards
+```
+
+```bash
+# 5. Confirm
+ls ~/devoted-dashboards
+```
+
+When done, tell the user:
+> "You're all set! 🎉 Whenever you want to publish a dashboard, just say: **'Publish this dashboard'** and drag your HTML file into the message."
+
 ## Local repo path
 
 The `devoted-reports/dashboards` repo is cloned at:
 ```
 ~/devoted-dashboards
-```
-
-If the folder doesn't exist yet, clone it first:
-```bash
-cd ~
-git clone git@github.com:devoted-reports/dashboards.git devoted-dashboards
 ```
 
 ## Team folder mapping
