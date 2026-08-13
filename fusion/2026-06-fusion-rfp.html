@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fusion · RFP Report — June 2026</title>
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#f5f5f7; color:#1d1d1f; line-height:1.5; padding:28px; }
+  .wrap { max-width:1180px; margin:0 auto; }
+  .hero { background:linear-gradient(135deg,#0f3057 0%,#1e40af 100%); color:#fff; padding:30px 36px; border-radius:14px; margin-bottom:22px; }
+  .hero .kicker { font-size:11px; opacity:.75; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; }
+  .hero h1 { font-size:22px; font-weight:600; line-height:1.32; margin-bottom:12px; }
+  .hero p { font-size:13.5px; opacity:.93; line-height:1.6; max-width:930px; }
+  .hero .stamp { font-size:11px; opacity:.6; margin-top:14px; }
+  .kpis { display:grid; grid-template-columns:repeat(6,1fr); gap:11px; margin-bottom:24px; }
+  .kpi { background:#fff; border:1px solid #e5e5e7; border-radius:10px; padding:13px 15px; }
+  .kpi .lab { font-size:10px; color:#6e6e73; text-transform:uppercase; letter-spacing:.4px; font-weight:700; }
+  .kpi .val { font-size:23px; font-weight:700; margin-top:6px; line-height:1; }
+  .kpi .sub { font-size:11px; color:#6e6e73; margin-top:5px; }
+  .v-red{color:#b91c1c;} .v-amber{color:#b45309;} .v-green{color:#15803d;}
+  .sec { display:flex; align-items:center; gap:14px; margin:32px 0 14px; padding-bottom:11px; border-bottom:1px solid #e5e5e7; }
+  .sec .num { width:30px;height:30px;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
+  .sec .ttl { font-size:19px; font-weight:600; }
+  .sec .right { margin-left:auto; font-size:12.5px; color:#6e6e73; }
+  .b-blue{background:#1e40af;} .b-rose{background:#be123c;} .b-amber{background:#b45309;} .b-teal{background:#0f766e;} .b-purple{background:#6d28d9;} .b-slate{background:#334155;}
+  .card { background:#fff; border:1px solid #e5e5e7; border-radius:12px; padding:18px 22px; box-shadow:0 1px 3px rgba(0,0,0,.04); margin-bottom:18px; }
+  .card h3 { font-size:13px; text-transform:uppercase; letter-spacing:.4px; color:#6e6e73; font-weight:700; margin-bottom:12px; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th { text-align:left; padding:8px 10px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.4px; color:#6e6e73; border-bottom:2px solid #e5e5e7; }
+  td { padding:8px 10px; border-bottom:1px solid #f0f0f2; vertical-align:top; }
+  .num-cell { text-align:right; font-variant-numeric:tabular-nums; }
+  .pill { display:inline-block; padding:2px 9px; border-radius:12px; font-size:10.5px; font-weight:700; }
+  .p-red{background:#fee2e2;color:#b91c1c;} .p-amber{background:#fef3c7;color:#92400e;} .p-green{background:#dcfce7;color:#15803d;} .p-blue{background:#dbeafe;color:#1e40af;} .p-gray{background:#f1f5f9;color:#475569;}
+  .bars { display:flex; align-items:flex-end; gap:10px; height:140px; padding-top:10px; }
+  .bar { flex:1; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:5px; }
+  .bar .bh { width:70%; border-radius:5px 5px 0 0; background:#1e40af; display:flex; align-items:flex-start; justify-content:center; color:#fff; font-size:11px; font-weight:700; padding-top:3px; }
+  .bar .bl { font-size:10.5px; color:#6e6e73; }
+  .funnel { display:flex; flex-direction:column; gap:8px; }
+  .frow { display:grid; grid-template-columns:230px 1fr 90px; gap:12px; align-items:center; }
+  .ftrack { background:#f1f1f4; height:28px; border-radius:6px; overflow:hidden; }
+  .ffill { height:100%; display:flex; align-items:center; padding-left:10px; color:#fff; font-weight:700; font-size:12px; border-radius:6px; }
+  .fmeta { font-size:12px; color:#6e6e73; text-align:right; }
+  .bar-row { display:grid; grid-template-columns:150px 1fr 36px; gap:10px; align-items:center; padding:4px 0; font-size:12.5px; }
+  .bar-track { background:#f1f1f4; height:16px; border-radius:4px; overflow:hidden; }
+  .bar-fill { height:100%; border-radius:4px; }
+  .callout { padding:14px 18px; border-radius:8px; margin:14px 0; font-size:13px; line-height:1.6; }
+  .c-red{background:#fef2f2;border-left:4px solid #b91c1c;color:#7f1d1d;} .c-amber{background:#fffbeb;border-left:4px solid #f59e0b;color:#78350f;} .c-blue{background:#eff6ff;border-left:4px solid #1e40af;color:#1e3a8a;} .c-green{background:#f0fdf4;border-left:4px solid #15803d;color:#14532d;}
+  .callout .h { font-size:11px; text-transform:uppercase; letter-spacing:.5px; font-weight:700; margin-bottom:8px; }
+  .legend { font-size:11.5px; color:#6e6e73; line-height:1.7; background:#fafafa; border-radius:8px; padding:12px 16px; }
+</style>
+<style>
+  /* ── PASSWORD GATE ── */
+  #pw-gate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #f5f5f7;
+    display: flex; align-items: center; justify-content: center;
+    font-family: -apple-system, 'DM Sans', system-ui, sans-serif;
+  }
+  #pw-gate.hidden { display: none; }
+  #pw-box {
+    background: #fff; border: 1px solid #e5e5ea;
+    border-radius: 12px; padding: 36px 40px; width: 340px;
+    text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  #pw-logo {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #8e8e93; margin-bottom: 18px;
+  }
+  #pw-title {
+    font-size: 15px; font-weight: 600; color: #1c1c1e; margin-bottom: 6px;
+  }
+  #pw-sub {
+    font-size: 12px; color: #8e8e93; margin-bottom: 22px;
+  }
+  #pw-input {
+    width: 100%; padding: 10px 12px; font-size: 13px;
+    border: 1px solid #e5e5ea; border-radius: 8px;
+    background: #f5f5f7; color: #1c1c1e; outline: none;
+    margin-bottom: 12px; box-sizing: border-box;
+    transition: border-color 0.15s;
+  }
+  #pw-input:focus { border-color: #636366; }
+  #pw-input.pw-error { border-color: #ff3b30; }
+  #pw-btn {
+    width: 100%; padding: 10px; font-size: 13px; font-weight: 600;
+    background: #1c1c1e; color: #fff;
+    border: none; border-radius: 8px; cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  #pw-btn:hover { opacity: 0.82; }
+  #pw-err {
+    font-size: 11px; color: #ff3b30; margin-top: 10px; min-height: 16px;
+  }
+</style>
+</head>
+<body>
+<!-- PASSWORD GATE -->
+<div id="pw-gate">
+  <div id="pw-box">
+    <div id="pw-logo">Devoted Reports</div>
+    <div id="pw-title">Fusion · RFP Report — June 2026</div>
+    <div id="pw-sub">This report is confidential.</div>
+    <input id="pw-input" type="password" placeholder="Password" autocomplete="current-password" />
+    <button id="pw-btn">Unlock</button>
+    <div id="pw-err"></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">FUSION · RFP REPORT · JUNE 2026</div>
+    <h1>23 RFPs in June — the biggest month of 2026 (≈4× May), almost entirely Unity-driven. But 43% bounced to “need more info”: the briefs come in thin.</h1>
+    <p>What requests are coming in and their quality. Volume and conversion from the Fusion RFP data; brief quality from the platform export (rfps_2026-06-24). 20 of 23 are real (non-test). A same-day request (Crow Studio, 24 Jun) is excluded.</p>
+    <div class="stamp">Sources: “3. Fusion FRP Data” tab + rfps_2026-06-24 export. Period: Jun 2026 (export 24 Jun; same-day request excluded). Build date: 24 Jun 2026.</div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="lab">RFPs in June</div><div class="val">23</div><div class="sub">20 real · ≈4× vs May</div></div>
+    <div class="kpi"><div class="lab">Unity-sourced</div><div class="val v-blue" style="color:#1e40af;">96%</div><div class="sub">22 of 23 Unity engine</div></div>
+    <div class="kpi"><div class="lab">Need more info</div><div class="val v-red">43%</div><div class="sub">10 of 23 stuck</div></div>
+    <div class="kpi"><div class="lab">Sent to client</div><div class="val v-amber">9</div><div class="sub">+1 approved</div></div>
+    <div class="kpi"><div class="lab">Approved</div><div class="val v-green">1</div><div class="sub">2 rejected</div></div>
+    <div class="kpi"><div class="lab">Mostly “Short” RFPs</div><div class="val">16</div><div class="sub">of 24 · thin briefs</div></div>
+  </div>
+
+  <!-- 0. EXEC SUMMARY -->
+  <div class="card" style="border-left:5px solid #1e40af;">
+    <h3 style="color:#1e40af;">Executive summary</h3>
+    <table>
+      <tbody>
+        <tr><td style="width:140px;"><b>Volume</b></td><td>23 RFPs in June (20 real) — the strongest month of 2026, up ~4× from May (6). <b>Unity is now the dominant source</b> (23/24 Unity engine; source “Unity Asset Store”). The Unity collaboration is producing inbound.</td></tr>
+        <tr><td><b>Quality (the issue)</b></td><td>Headline fields are filled (project overview, company, engine, a budget field — 96–100%), but the detail needed to quote is largely missing: <b>needed resources 4%, asset quantity 4%, references 0–8%</b>, and budgets are mostly placeholder. Result: <b>43% (10) went to NEED_ADDITIONAL_INFO</b>. Most are “Short” RFPs (16/23) — the short intake produces thin briefs.</td></tr>
+        <tr><td><b>Outcome so far</b></td><td>9 sent to client, 1 approved, 2 rejected, 1 still new (a duplicate). June deals are young — most are mid-funnel.</td></tr>
+        <tr><td><b>Mix</b></td><td>Mostly RETAINER (18/24); disciplines skew 3D — characters, creatures, props, animation. Buyers are game studios.</td></tr>
+        <tr><td style="color:#15803d;"><b>Takeaway</b></td><td>Unity drives volume — but the intake form lets thin RFPs through, costing a clarification round on 42%. This is the case for the <b>AI-RFP / required-fields gate</b>: capture resources, quantity, references and a real budget before submit.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 1. VOLUME -->
+  <div class="sec"><div class="num b-blue">1</div><div class="ttl">Volume &amp; trend — 2026</div><div class="right">RFPs created per month</div></div>
+  <div class="card">
+    <div class="bars">
+      <div class="bar"><div class="bh" style="height:46%;">11</div><div class="bl">Jan</div></div>
+      <div class="bar"><div class="bh" style="height:17%;">4</div><div class="bl">Feb</div></div>
+      <div class="bar"><div class="bh" style="height:21%;">5</div><div class="bl">Mar</div></div>
+      <div class="bar"><div class="bh" style="height:13%;">3</div><div class="bl">Apr</div></div>
+      <div class="bar"><div class="bh" style="height:25%;">6</div><div class="bl">May</div></div>
+      <div class="bar"><div class="bh" style="height:100%;background:#15803d;">23</div><div class="bl">Jun</div></div>
+    </div>
+    <div class="callout c-green" style="margin-bottom:0;">
+      <div class="h">June is the inflection</div>
+      23 RFPs vs a 2026 monthly average of ~5. The jump is the <b>Unity Asset Store collaboration</b> — 22 of 23 June RFPs are Unity-engine projects.
+    </div>
+  </div>
+
+  <!-- 2. STATUS FUNNEL -->
+  <div class="sec"><div class="num b-rose">2</div><div class="ttl">Status of June RFPs</div><div class="right">where the 24 are</div></div>
+  <div class="card">
+    <div class="funnel">
+      <div class="frow"><div>NEED_ADDITIONAL_INFO</div><div class="ftrack"><div class="ffill" style="width:43%;background:#b91c1c;">10</div></div><div class="fmeta v-red">43%</div></div>
+      <div class="frow"><div>SENT_TO_CLIENT</div><div class="ftrack"><div class="ffill" style="width:39%;background:#b45309;">9</div></div><div class="fmeta">39%</div></div>
+      <div class="frow"><div>REJECTED</div><div class="ftrack"><div class="ffill" style="width:9%;background:#9a9aa0;min-width:40px;">2</div></div><div class="fmeta">9%</div></div>
+      <div class="frow"><div>APPROVED_BY_CLIENT</div><div class="ftrack"><div class="ffill" style="width:5%;background:#15803d;min-width:40px;">1</div></div><div class="fmeta v-green">4%</div></div>
+      <div class="frow"><div>NEW_REQUEST (raw export status)</div><div class="ftrack"><div class="ffill" style="width:5%;background:#64748b;min-width:40px;">1</div></div><div class="fmeta">4%*</div></div>
+    </div>
+    <div class="callout c-red">
+      <div class="h">The 42% clarification tax</div>
+      Nearly half of June RFPs stalled at <b>NEED_ADDITIONAL_INFO</b> — we had to go back and ask. That’s time lost and a drop-off risk, and it traces directly to thin intake (next section).
+    </div>
+    <div class="callout c-amber" style="margin-bottom:0;">
+      <div class="h">* The 1 “NEW_REQUEST” is not actually untouched — source mismatch</div>
+      The raw export marks 1 as NEW_REQUEST, but the curated RFP tracker shows it’s handled: <b>mdrngames (ID 1874) = a duplicate</b> of an already-bid RFP (ID 1859, in Client’s review — 3 bids sent). Lesson: the platform export status lags the analyst sheet — reconcile the two before reporting status.
+    </div>
+  </div>
+
+  <!-- 3. WHAT'S COMING IN -->
+  <div class="sec"><div class="num b-teal">3</div><div class="ttl">What’s coming in</div><div class="right">breakdown of the 24</div></div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Source</h3>
+      <div class="bar-row"><span>Unity Asset Store</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#1e40af;"></div></div><span class="num-cell">~25</span></div>
+      <div class="bar-row"><span>Other / direct</span><div class="bar-track"><div class="bar-fill" style="width:8%;background:#94a3b8;"></div></div><span class="num-cell">~2</span></div>
+      <div class="callout c-blue" style="margin:8px 0 0;font-size:12px;">June inbound is almost all Unity. Google Ads / Direct (strong earlier in 2026) were minor this month.</div>
+    </div>
+    <div class="card">
+      <h3>Request type &amp; model</h3>
+      <table><tbody>
+        <tr><td>SHORT RFP</td><td class="num-cell">16</td></tr>
+        <tr><td>GENERAL RFP</td><td class="num-cell">8</td></tr>
+        <tr><td>Payment: RETAINER</td><td class="num-cell">18</td></tr>
+        <tr><td>Payment: FIX_PRICE</td><td class="num-cell">6</td></tr>
+        <tr><td>Engine: Unity / Unreal</td><td class="num-cell">23 / 1</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Disciplines requested</h3>
+      <table><tbody>
+        <tr><td>3D Characters</td><td class="num-cell">7</td></tr>
+        <tr><td>3D Creatures</td><td class="num-cell">5</td></tr>
+        <tr><td>3D Props</td><td class="num-cell">5</td></tr>
+        <tr><td>3D Animation / Rigging</td><td class="num-cell">4</td></tr>
+        <tr><td>2D Illustration</td><td class="num-cell">3</td></tr>
+        <tr><td>3D Animals</td><td class="num-cell">3</td></tr>
+      </tbody></table>
+      <div class="callout c-blue" style="margin:8px 0 0;font-size:12px;">Demand skews <b>3D character / creature / prop</b> work — match supply and outreach to this.</div>
+    </div>
+    <div class="card">
+      <h3>Budget signal (midpoint)</h3>
+      <div class="bar-row"><span>&lt; $1k (placeholder)</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#b91c1c;"></div></div><span class="num-cell">16</span></div>
+      <div class="bar-row"><span>&gt; $10k (real)</span><div class="bar-track"><div class="bar-fill" style="width:38%;background:#15803d;"></div></div><span class="num-cell">6</span></div>
+      <div class="callout c-amber" style="margin:8px 0 0;font-size:12px;">A budget field is filled on 96%, but <b>16 of 24 values are placeholder/&lt;$1k</b> — not a real budget. 6 carry a real budget (&gt;$10k). Budget capture is low-quality.</div>
+    </div>
+  </div>
+
+  <!-- 4. QUALITY -->
+  <div class="sec"><div class="num b-amber">4</div><div class="ttl">Quality of requests — brief completeness</div><div class="right">why 42% need more info</div></div>
+  <div class="card">
+    <table>
+      <thead><tr><th>Brief field</th><th class="num-cell">Filled</th><th>Read</th></tr></thead>
+      <tbody>
+        <tr><td>Project overview</td><td class="num-cell">100%</td><td><span class="pill p-green">ok</span> always present</td></tr>
+        <tr><td>Company name</td><td class="num-cell">100%</td><td><span class="pill p-green">ok</span></td></tr>
+        <tr><td>Game engine</td><td class="num-cell">100%</td><td><span class="pill p-green">ok</span> (Unity)</td></tr>
+        <tr><td>Portfolio categories</td><td class="num-cell">79%</td><td><span class="pill p-green">ok</span></td></tr>
+        <tr><td>Number of artists</td><td class="num-cell">75%</td><td><span class="pill p-amber">partial</span></td></tr>
+        <tr><td>Client notes</td><td class="num-cell">17%</td><td><span class="pill p-red">thin</span></td></tr>
+        <tr><td>Quality / reference notes</td><td class="num-cell">8%</td><td><span class="pill p-red">thin</span></td></tr>
+        <tr><td>Needed resources</td><td class="num-cell">4%</td><td><span class="pill p-red">missing</span> can’t staff without this</td></tr>
+        <tr><td>Asset quantity</td><td class="num-cell">4%</td><td><span class="pill p-red">missing</span> can’t scope</td></tr>
+        <tr><td>Reference games</td><td class="num-cell">0%</td><td><span class="pill p-red">missing</span></td></tr>
+      </tbody>
+    </table>
+    <div class="callout c-amber" style="margin-bottom:0;">
+      <div class="h">Diagnosis</div>
+      RFPs arrive with the <b>“who/what” but not the “how much / to what standard.”</b> The fields you need to actually quote and staff — resources, quantity, references, a real budget — are empty 90%+ of the time. That is exactly why 42% bounce to “need more info,” and it’s fixable at intake.
+    </div>
+  </div>
+
+  <!-- 5. WHAT USERS WANT -->
+  <div class="sec"><div class="num b-purple">5</div><div class="ttl">What users want &amp; brief quality</div><div class="right">SENT vs NEED-INFO, by example</div></div>
+  <div class="card">
+    <div class="callout c-blue" style="margin-top:0;">
+      <div class="h">Time to estimation</div>
+      From RFP created to estimation sent: <b>median ~5 days (120h), mean ~8.7 days</b> (June sample faster, ~2 days). This is calendar turnaround, not effort hours — effort isn’t captured in the data.
+    </div>
+    <div class="grid-2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:6px;">ESTIMATION SENT (9) — concrete, quotable</div>
+        <table><tbody>
+          <tr><td>TecVooDoo</td><td>Rigged/animated Quokka, low-poly (with ref)</td></tr>
+          <tr><td>SteamWorld</td><td>“Steampunk Samurai Girl” — detailed character</td></tr>
+          <tr><td>Mandatory Fun Labs</td><td>Modular character optimization (poly reduction)</td></tr>
+          <tr><td>Magic Pig Games</td><td>Restyle existing 3D characters, keep animations</td></tr>
+          <tr><td>Arcforge</td><td>Stylized water shader for Unity 6</td></tr>
+          <tr><td>Duelbook</td><td>Art for a physical TCG-style game</td></tr>
+          <tr><td>Ryunosuke</td><td>MetaHuman clothing (Unreal)</td></tr>
+          <tr><td>mdrngames</td><td>2D art for a VR crime game (cover, loading)</td></tr>
+          <tr><td>Patterson Legal Group</td><td>Mascot “GOAT Man” video (non-game)</td></tr>
+        </tbody></table>
+        <div class="callout c-green" style="margin:8px 0 0;font-size:12px;">Common thread: a <b>named asset + style + reference</b> → moves to estimation.</div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#b91c1c;margin-bottom:6px;">NEED MORE INFO (10 rows ≈ 5 clients) — thin / junk</div>
+        <table><tbody>
+          <tr><td>Cloud ×2</td><td>“Human and Orc MMORPG character” — one line</td></tr>
+          <tr><td>serkanakgunduz</td><td>“4 3D male human characters” — vague</td></tr>
+          <tr><td>TAMIM ×2</td><td>One says just “Tamim”; the other is <b>pasted Unity code</b></td></tr>
+          <tr><td>I.A.s.gamer ×2</td><td>“Free fire ki id label…” — gibberish/spam</td></tr>
+          <tr><td>SoundInVolumesVR</td><td>VR MMORPG, broad scope, Kickstarter link</td></tr>
+          <tr><td>Md kaif alam ×2</td><td>Huge “realistic FPS” wishlist; other is <b>pasted code</b></td></tr>
+        </tbody></table>
+        <div class="callout c-red" style="margin:8px 0 0;font-size:12px;">Pattern: <b>one-liners, duplicates, pasted code</b> — users misusing the form. Half aren’t real workable RFPs.</div>
+      </div>
+    </div>
+    <div class="callout c-amber" style="margin-bottom:0;">
+      <div class="h">What users actually want</div>
+      Mostly <b>3D characters / creatures</b>, <b>restyling &amp; optimizing existing assets</b>, plus some 2D key/cover art and shaders. Buyers are <b>indie / solo devs on Unity</b>, personal Gmail, budgets <b>$50–1,500</b> (a few to $20k). Recurring motive: <b>“so I don’t have to use AI”</b> — they specifically want a human artist. That anti-AI demand is Fusion’s positioning.
+    </div>
+  </div>
+
+  <!-- 6. RELEVANCE / CONCLUSION -->
+  <div class="sec"><div class="num b-slate">6</div><div class="ttl">Relevance &amp; conclusions</div><div class="right">are these the right requests?</div></div>
+  <div class="card">
+    <div class="callout c-green">
+      <div class="h">Relevance is high</div>
+      In the curated RFP data (2026), <b>~70% of scored RFPs are marked “relevant”</b> (Yes 79 vs No 31), and June buyers are game studios on Unity — the right ICP. The inbound is good; the loss is in intake quality and follow-through, not in attracting wrong leads.
+    </div>
+    <div class="callout c-blue" style="margin-bottom:0;">
+      <div class="h">What to do</div>
+      <ul style="margin:6px 0 0;padding-left:18px;line-height:1.7;">
+        <li><b>Fix intake (AI-RFP / required fields):</b> make resources, asset quantity, references and a real budget required before submit — kills the 42% clarification round.</li>
+        <li><b>Lean into Unity:</b> it’s now the #1 source — align supply (3D char/creature/prop) and the partnership reporting (v.10.12.0 UTM) to it.</li>
+        <li><b>Work the mid-funnel:</b> 9 sent + 10 need-info — chase these to decision; don’t let June RFPs age.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="legend">
+    <b style="color:#1d1d1f;">Notes:</b> June = 1–24 Jun 2026 (export date). 24 RFPs, 21 real (non-test). Volume/source/discipline/relevance from “3. Fusion FRP Data”; brief completeness and status from the rfps_2026-06-24 platform export. Budget “placeholder” = midpoint &lt; $1k (values like 1/25/800), i.e. not a real budget entered.
+  </div>
+
+</div>
+
+  <!-- PASSWORD GATE LOGIC -->
+  <script>
+    (function () {
+      var HASH = 'd58ae1948f44e1cc6f2b89c06e7cbf93f2ab96606d20a535f699c065e0a0cfa2';
+      var gate  = document.getElementById('pw-gate');
+      var input = document.getElementById('pw-input');
+      var btn   = document.getElementById('pw-btn');
+      var err   = document.getElementById('pw-err');
+      if (sessionStorage.getItem('dr_unlocked') === '1') { gate.classList.add('hidden'); return; }
+      function sha256(str) {
+        var buf = new TextEncoder().encode(str);
+        return crypto.subtle.digest('SHA-256', buf).then(function(hash) {
+          return Array.from(new Uint8Array(hash)).map(function(b) { return b.toString(16).padStart(2,'0'); }).join('');
+        });
+      }
+      function attempt() {
+        var val = input.value;
+        if (!val) return;
+        sha256(val).then(function(digest) {
+          if (digest === HASH) {
+            sessionStorage.setItem('dr_unlocked', '1');
+            gate.classList.add('hidden');
+          } else {
+            input.classList.add('pw-error');
+            err.textContent = 'Incorrect password. Try again.';
+            input.value = ''; input.focus();
+          }
+        });
+      }
+      btn.addEventListener('click', attempt);
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') attempt();
+        input.classList.remove('pw-error'); err.textContent = '';
+      });
+      input.focus();
+    })();
+  </script>
+
+</body>
+</html>
